@@ -11,7 +11,11 @@ import java.lang.Integer;
 
 public class ActionHandler implements ActionListener {
 
+    
+
+
     public void actionPerformed(ActionEvent e) {
+        new KeyHandler();
 
         System.out.println("Action performed");
 		JFrame frame = Main.frame;
@@ -20,17 +24,21 @@ public class ActionHandler implements ActionListener {
         if(e.getSource() == Main.StartGameButton) {
             System.out.println("Starting");
             Main.Start = true;
+            Main.GameActive = true;
+            Main.StartLabel.setVisible(true);
+            Main.CountdownLabel.setText("3");
 
             panGameField.add(Main.StartLabel);
             panGameField.add(Main.MainMenuButton);
+            panGameField.add(Main.CountdownLabel);
             panGameField.setVisible(true);
 
             frame.remove(Main.MainMenuPanel);
             Main.MainMenuPanel.setVisible(false);
             frame.add(panGameField);
-            frame.setVisible(true);
+            //frame.setVisible(true);
             frame.repaint();
-           
+            new KeyHandler();
         }
         
 
@@ -40,6 +48,8 @@ public class ActionHandler implements ActionListener {
         }
 
         if(e.getSource() == Main.MainMenuButton) {
+            Main.GameActive = false;
+            Main.Start = false;
             frame.remove(panGameField);
 			panGameField.setVisible(false);
 			frame.getContentPane().removeAll();

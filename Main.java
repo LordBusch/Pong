@@ -8,6 +8,7 @@ public class Main {
     public static int PANEL_SIZE_X = 1920;
     public static int PANEL_SIZE_Y = 1080;
     public static boolean Start = false;
+    public static boolean GameActive = false;
 
     public static JFrame frame;
     public static JPanel MainMenuPanel;
@@ -16,6 +17,7 @@ public class Main {
     public static JButton MainMenuButton;
     public static JButton ExitButton;
     public static JLabel StartLabel;
+    public static JLabel CountdownLabel;
     public static ActionHandler handler;
 
     Font fontHeading = new Font("Verdana", Font.PLAIN, PANEL_SIZE_Y / 12);
@@ -33,6 +35,7 @@ public class Main {
     public void gui(){
 
         handler = new ActionHandler();
+        KeyHandler khandler = new KeyHandler();
 
         frame = new JFrame("Pong");
         frame.setBounds(0, 0, PANEL_SIZE_X, PANEL_SIZE_Y);
@@ -44,14 +47,16 @@ public class Main {
         frame.setLayout(null);
         ImageIcon image = new ImageIcon("Images/Pong-App-Icon.png");
 		frame.setIconImage(image.getImage());
+        frame.addKeyListener(khandler);
+        frame.setFocusable(true);
         frame.setVisible(true);
 
         //Main Menu
-
         MainMenuPanel = new JPanel();
         MainMenuPanel.setSize(PANEL_SIZE_X, PANEL_SIZE_Y);
         MainMenuPanel.setBackground(Color.black);
         MainMenuPanel.setLayout(null);
+        MainMenuPanel.addKeyListener(khandler);
 
         StartGameButton = new JButton("Start");
         StartGameButton.setBounds(PANEL_SIZE_X / 2 - 150, PANEL_SIZE_Y / 3 - 75, 300, 150);
@@ -96,12 +101,23 @@ public class Main {
         panGameField.setSize(PANEL_SIZE_X, PANEL_SIZE_Y);
         panGameField.setBackground(Color.black);
         panGameField.setLayout(null);
+        panGameField.addKeyListener(khandler);
+
+        CountdownLabel = new JLabel("3");
+        CountdownLabel.setBounds(PANEL_SIZE_X / 2 - 75, PANEL_SIZE_Y / 2 + 100, 150, 100);
+        CountdownLabel.setBackground(Color.black);
+        CountdownLabel.setForeground(Color.white);
+        CountdownLabel.setFont(fontHeading);
+        CountdownLabel.setVisible(false);
 
         frame.add(MainMenuPanel);
         frame.repaint();
     }
 
+    
+
     public static void main(String[] args) {
         new Main();
+        new KeyHandler();
     }
 }
