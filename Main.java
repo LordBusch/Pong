@@ -8,11 +8,11 @@ public class Main {
     public static int PANEL_SIZE_X = 1920;
     public static int PANEL_SIZE_Y = 1080;
     public static boolean Start = false;
+    public static boolean CounterActive = false;
     public static boolean GameActive = false;
 
     public static JFrame frame;
     public static JPanel MainMenuPanel;
-    public static JPanel panGameField;
     public static JButton StartGameButton;
     public static JButton MainMenuButton;
     public static JButton ExitButton;
@@ -49,6 +49,7 @@ public class Main {
 		frame.setIconImage(image.getImage());
         frame.addKeyListener(khandler);
         frame.setFocusable(true);
+        frame.setUndecorated(true);
         frame.setVisible(true);
 
         //Main Menu
@@ -93,15 +94,6 @@ public class Main {
             
         MainMenuPanel.add(StartGameButton);
         MainMenuPanel.add(ExitButton);
-
-
-        //Game Field
-
-        panGameField = new JPanel();
-        panGameField.setSize(PANEL_SIZE_X, PANEL_SIZE_Y);
-        panGameField.setBackground(Color.black);
-        panGameField.setLayout(null);
-        panGameField.addKeyListener(khandler);
 
         CountdownLabel = new JLabel("3");
         CountdownLabel.setBounds(PANEL_SIZE_X / 2 - 75, PANEL_SIZE_Y / 2 + 100, 150, 100);

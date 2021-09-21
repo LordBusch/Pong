@@ -35,13 +35,14 @@ public class Countdown {
                 
                 
                 if (timer >= 0) {
-                    System.out.println("" + timer);
                     timer--;
                 }
                 if (timer == -1) {
                     TimerA.cancel();
                     Main.CountdownLabel.setVisible(false);
                     Main.StartLabel.setVisible(false);
+                    Main.GameActive = true;
+                    Main.CounterActive = false;
                 }
                 
 

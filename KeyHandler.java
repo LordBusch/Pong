@@ -7,78 +7,132 @@ import java.awt.*;
 public class KeyHandler implements KeyListener{
 
     Countdown C = new Countdown();
+    GameField panGameField = new GameField();
 
-    public static void wait(int ms)
-	{
-		try
-		{
-			Thread.sleep(ms);
-		}
-		catch(InterruptedException ex)
-		{
-			Thread.currentThread().interrupt();
-		}
-	}
+    boolean up1, up2, down1, down2;
+
+    public void draw() {
+        //if(Main.GameActive) {
+            
+                
+                if(up1) {
+                GameField.yposracket1 = GameField.yposracket1 - 15;
+                new GameField();
+                panGameField.repaint();
+                Main.frame.repaint();
+                }
+                
+
+                
+                if(down1) {
+                GameField.yposracket1 = GameField.yposracket1 + 15;
+                new GameField();
+                panGameField.repaint();
+                Main.frame.repaint();
+                }
+                
+                
+
+                
+                if(up2) {
+                GameField.yposracket2 = GameField.yposracket2 - 15;
+                new GameField();
+                panGameField.repaint();
+                Main.frame.repaint();
+                }
+                
+
+
+                if(down2) {
+                GameField.yposracket2 = GameField.yposracket2 + 15;
+                new GameField();
+                panGameField.repaint();
+                Main.frame.repaint();
+                }
+                
+            
+        //}
+    }
 
     public void keyTyped(KeyEvent e) {
-        System.out.println("You typed key char:" + e.getKeyChar());
+
+        
+        //System.out.println("You typed key char:" + e.getKeyChar());
     }
     
     public void keyPressed(KeyEvent e) {
 
-        if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-            System.out.println("ENTER START");
-            if (Main.GameActive) {
+        if(Main.GameActive) {
+            
+            int keyCode = e.getKeyCode();
+            switch(keyCode) {
+                
+                case KeyEvent.VK_UP:
+                up1 = true;
+                break;
+
+                case KeyEvent.VK_DOWN:
+                down1 = true;
+                break;
+                
+
+                case KeyEvent.VK_W:
+                up2 = true;
+                break;
+
+                case KeyEvent.VK_S:
+                down2 = true;
+                break;
             }
+            
+            draw();
         }
+
+        
         //int key = e.getKeyCode();
         System.out.println("You pressed key char:" + e.getKeyChar());
     }
 
     public void keyReleased(KeyEvent e) {
 
-        if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-            System.out.println("ENTER END");
-            if (Main.GameActive) {
+        if (Main.GameActive) {
 
-                C.counter();
+        
+            int keyCode = e.getKeyCode();
+            switch(keyCode) {
+                
+                case KeyEvent.VK_UP:
+                up1 = false;
+                break;
 
-                //new Countdown();
-                //C.counter();
-
-                /*
-                wait(2000);
-                //Main.CountdownLabel.setVisible(true);
-                Main.CountdownLabel.setText("2");
-                Main.frame.repaint();
-                wait(2000);
-                Main.CountdownLabel.setText("1");
-                Main.frame.repaint();
-                wait(2000);
-                */
+                case KeyEvent.VK_DOWN:
+                down1 = false;
+                break;
                 
 
-                //Main.CountdownLabel.setVisible(false);
-                //System.out.println("TEST");
-                /*
-                wait(1000);
-                Main.CountdownLabel.setText("2");
-                wait(1000);
-                Main.CountdownLabel.setText("1");
-                wait(1000);
-                System.out.println("3 Sec");
-                
-                wait(3000);
-                Main.StartLabel.setVisible(false);
-                
-                Main.CountdownLabel.setVisible(false);
-                wait(1000);
-                */
+                case KeyEvent.VK_W:
+                up2 = false;
+                break;
+
+                case KeyEvent.VK_S:
+                down2 = false;
+                break;
             }
-            
+
+
+        }
+
+
+        if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+            if (Main.CounterActive) {
+                C.counter();
+            }
         }
         System.out.println("You released key char:" + e.getKeyChar());
     }
+
+
+    
 
     
 
