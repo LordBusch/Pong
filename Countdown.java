@@ -13,6 +13,7 @@ public class Countdown {
         count = 3;
         timer = count;
         Main.CountdownLabel.setVisible(true);
+        GameField panGameField = new GameField();
 
         Timer TimerA = new Timer();
         TimerTask TaskA = new TimerTask() {
@@ -43,6 +44,7 @@ public class Countdown {
                     Main.StartLabel.setVisible(false);
                     Main.GameActive = true;
                     Main.CounterActive = false;
+                    panGameField.CalculateBallDirection();
                 }
                 
 

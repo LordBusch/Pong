@@ -10,6 +10,7 @@ public class Main {
     public static boolean Start = false;
     public static boolean CounterActive = false;
     public static boolean GameActive = false;
+    public static boolean drawHelpLines;
 
     public static JFrame frame;
     public static JPanel MainMenuPanel;
@@ -18,6 +19,9 @@ public class Main {
     public static JButton ExitButton;
     public static JLabel StartLabel;
     public static JLabel CountdownLabel;
+    public static JLabel GameOverLabel;
+    public static JLabel ScorePlayer1;
+    public static JLabel ScorePlayer2;
     public static ActionHandler handler;
 
     Font fontHeading = new Font("Verdana", Font.PLAIN, PANEL_SIZE_Y / 12);
@@ -78,8 +82,9 @@ public class Main {
         ExitButton.addActionListener(handler);
 
 
+        //GameField
         StartLabel = new JLabel("Press `Enter´ to start");
-        StartLabel.setBounds(PANEL_SIZE_X / 2 - 500, PANEL_SIZE_Y / 2 - 50, 1000, 100);
+        StartLabel.setBounds(PANEL_SIZE_X / 2 - 500, PANEL_SIZE_Y / 8, 1000, 100);
         StartLabel.setBackground(Color.black);
         StartLabel.setForeground(Color.white);
         StartLabel.setFont(fontHeading);
@@ -96,11 +101,30 @@ public class Main {
         MainMenuPanel.add(ExitButton);
 
         CountdownLabel = new JLabel("3");
-        CountdownLabel.setBounds(PANEL_SIZE_X / 2 - 75, PANEL_SIZE_Y / 2 + 100, 150, 100);
+        CountdownLabel.setBounds(PANEL_SIZE_X / 2 - 30, PANEL_SIZE_Y / 8 + 150, 150, 100);
         CountdownLabel.setBackground(Color.black);
         CountdownLabel.setForeground(Color.white);
         CountdownLabel.setFont(fontHeading);
         CountdownLabel.setVisible(false);
+
+        GameOverLabel = new JLabel("GAME OVER");
+        GameOverLabel.setFont(fontHeading);
+        GameOverLabel.setBounds(PANEL_SIZE_X / 2 - 300, PANEL_SIZE_Y / 2, 600, 100);
+        GameOverLabel.setBackground(Color.black);
+        GameOverLabel.setForeground(Color.white);
+        GameOverLabel.setVisible(false);
+
+        ScorePlayer1 = new JLabel("0");
+        ScorePlayer1.setFont(fontSubheadings);
+        ScorePlayer1.setBounds(PANEL_SIZE_X / 2 - 125, 0, 50, 50);
+        ScorePlayer1.setBackground(Color.black);
+        ScorePlayer1.setForeground(Color.red);
+
+        ScorePlayer2 = new JLabel("0");
+        ScorePlayer2.setFont(fontSubheadings);
+        ScorePlayer2.setBounds(PANEL_SIZE_X / 2 + 100, 0, 50, 50);
+        ScorePlayer2.setBackground(Color.black);
+        ScorePlayer2.setForeground(Color.red);
 
         frame.add(MainMenuPanel);
         frame.repaint();
