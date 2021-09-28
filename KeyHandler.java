@@ -13,7 +13,6 @@ public class KeyHandler implements KeyListener{
 
     public void draw() {
         //if(Main.GameActive) {
-            
                 
                 if(up1 && GameField.yposracket1 > 0) {
                 GameField.yposracket1 = GameField.yposracket1 - 25;
@@ -21,8 +20,6 @@ public class KeyHandler implements KeyListener{
                 panGameField.repaint();
                 Main.frame.repaint();
                 }
-                
-
                 
                 if(down1 && GameField.yposracket1 + GameField.heightRacket < Main.PANEL_SIZE_Y) {
                 GameField.yposracket1 = GameField.yposracket1 + 25;
@@ -75,11 +72,15 @@ public class KeyHandler implements KeyListener{
                 
 
                 case KeyEvent.VK_W:
-                up1 = true;
+                if (Main.BotBool == false) {
+                    up1 = true;
+                }
                 break;
 
                 case KeyEvent.VK_S:
-                down1 = true;
+                if (Main.BotBool == false) {
+                    down1 = true;
+                }
                 break;
             }
             
@@ -106,11 +107,15 @@ public class KeyHandler implements KeyListener{
                 
 
                 case KeyEvent.VK_W:
-                up1 = false;
+                if (Main.BotBool == false) {
+                    up1 = false;
+                }
                 break;
 
                 case KeyEvent.VK_S:
-                down1 = false;
+                if (Main.BotBool == false) {
+                    down1 = false;
+                }
                 break;
             }
 

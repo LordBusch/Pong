@@ -39,6 +39,8 @@ public class GameField extends JPanel{
         this.setLayout(null);
         this.setBackground(Color.black);
         this.setOpaque(true);
+
+
     }
 
     //Create method for delay
@@ -67,6 +69,7 @@ public class GameField extends JPanel{
             DrawBall(g);
             Score();
             wait(1);
+            MoveBotRacket();
         }
     }
 
@@ -105,6 +108,8 @@ public class GameField extends JPanel{
 
     public void DrawBall(Graphics g) {
 
+        
+
         if(Main.GameActive) {
             if (RightDown) {
                 xposball++;
@@ -124,6 +129,23 @@ public class GameField extends JPanel{
             }
             g.setColor(Color.white);
             g.fillOval(xposball, yposball, radiusBall * 2, radiusBall * 2);
+            /*
+            //paint Ball Icon
+            if (Main.loadBallImgOnce == false) {
+                ImageIcon BallIcon = new ImageIcon("Images/Pong-Ball-Icon.png");
+                Image BallImg = BallIcon.getImage();
+                Image resizedBallImg = BallImg.getScaledInstance(150, 150, java.awt.Image.SCALE_SMOOTH);
+                ImageIcon scaledBallImg = new ImageIcon(resizedBallImg);
+                BufferedImage bi = new BufferedImage(
+                scaledBallImg.getIconWidth(),
+                scaledBallImg.getIconHeight(),
+                BufferedImage.TYPE_INT_RGB);
+                Main.loadBallImgOnce = true;
+            }
+            
+
+            scaledBallImg.paintIcon(null, g, xposball, yposball);
+            */
             //System.out.println(xposball);
             //System.out.println(yposball);
             Main.frame.repaint();
@@ -181,22 +203,23 @@ public class GameField extends JPanel{
             
 
         //Check, if ball is behind racket
-        if (xposball < 0) {
+        if (xposball < 90) {
             RightUp = false;
             RightDown = false;
             LeftUp = false;
             Leftdown = false;
             Main.GameOverLabel.setVisible(true);
+            Main.RetryButton.setVisible(true);
         }
-        if (xposball > Main.PANEL_SIZE_X) {
+        if (xposball > Main.PANEL_SIZE_X - 90) {
             RightUp = false;
             RightDown = false;
             LeftUp = false;
             Leftdown = false;
             Main.GameOverLabel.setVisible(true);
+            Main.RetryButton.setVisible(true);
         }
     }
-
 
     public void Score() {
         ValueScore1String = "" + ValueScore1;
@@ -204,6 +227,12 @@ public class GameField extends JPanel{
 
         ValueScore2String = "" + ValueScore2;
 		Main.ScorePlayer2.setText(ValueScore2String);
+    }
+
+    public void MoveBotRacket() {
+        if (Main.BotBool) {
+            GameField.yposracket1 = GameField.yposball - 125;
+        }
     }
 
     /*
